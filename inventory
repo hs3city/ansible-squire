@@ -2,5 +2,5 @@
 on-premise
 
 [on-premise]
-10.14.4.4 name=squire ansible_ssh_user=hsop
+10.14.4.4 name=squire ansible_user=hsop
 

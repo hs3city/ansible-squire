@@ -29,7 +29,14 @@
   with_items: "{{ apps }}"
   become: yes
 
-- name: copy aplication compose files
+- name: create application config directories
+  file:
+    state: directory
+    path: "{{ apps_compose_path }}{{ item }}"
+  with_items: "{{ apps | map(attribute='name') | list }}"
+  become: yes
+
+- name: copy application compose files
   template:
     dest: "{{ apps_compose_path }}{{ item }}/docker-compose.yml"
     src: "{{ item }}/docker-compose.j2"
