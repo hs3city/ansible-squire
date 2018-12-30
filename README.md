@@ -53,7 +53,6 @@ services:
       - ...
       - ...
       - name: [your_app]
-        git_url: ~ # this is a NULL in yml
 ```
 
 3. Test your changes

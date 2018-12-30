@@ -4,9 +4,7 @@
   vars:
     apps:
       - name: netdata
-        git_url: ~
       - name: spotty-kiwi
-        git_url: ~
       - name: at
         git_url: https://github.com/hs3city/at.git
       - name: whois
