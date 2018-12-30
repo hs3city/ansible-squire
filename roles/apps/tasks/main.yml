@@ -29,11 +29,12 @@
   with_items: "{{ apps }}"
   become: yes
 
+# this needs to be done in seperate step, because of how template works
 - name: create application config directories
   file:
     state: directory
     path: "{{ apps_compose_path }}{{ item }}"
-  with_items: "{{ apps | map(attribute='name') | list }}"
+  with_items: "{{ apps_names }}"
   become: yes
 
 - name: copy application compose files
@@ -41,7 +42,7 @@
     dest: "{{ apps_compose_path }}{{ item }}/docker-compose.yml"
     src: "{{ item }}/docker-compose.j2"
     validate: docker-compose -f %s config
-  with_items: "{{ apps | map(attribute='name') | list }}"
+  with_items: "{{ apps_names }}"
   become: yes
 
 - name: run applications
@@ -49,5 +50,5 @@
     project_src: "{{ apps_compose_path }}{{ item }}"
     pull: true
     build: true
-  with_items: "{{ apps | map(attribute='name') | list }}"
+  with_items: "{{ apps_names }}"
 
