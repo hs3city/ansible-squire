@@ -32,22 +32,22 @@
 - name: create application config directories
   file:
     state: directory
-    path: "{{ apps_compose_path }}{{ item }}"
-  with_items: "{{ apps | map(attribute='name') | list }}"
+    path: "{{ apps_compose_path }}{{ item.name }}"
+  with_items: "{{ apps }}"
   become: yes
 
 - name: copy application compose files
   template:
-    dest: "{{ apps_compose_path }}{{ item }}/docker-compose.yml"
-    src: "{{ item }}/docker-compose.j2"
+    dest: "{{ apps_compose_path }}{{ item.name }}/docker-compose.yml"
+    src: "{{ item.name }}/docker-compose.j2"
     validate: docker-compose -f %s config
-  with_items: "{{ apps | map(attribute='name') | list }}"
+  with_items: "{{ apps }}"
   become: yes
 
 - name: run applications
   docker_service:
-    project_src: "{{ apps_compose_path }}{{ item }}"
+    project_src: "{{ apps_compose_path }}{{ item.name }}"
     pull: true
     build: true
-  with_items: "{{ apps | map(attribute='name') | list }}"
+  with_items: "{{ apps }}"
 
