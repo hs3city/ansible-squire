@@ -21,6 +21,10 @@
       docker_package_state: latest
       tags:
         - landscape
+        
+    - role: nginxinc.nginx
+      tags:
+        - landscape
 
     - role: admin_utilities
       tags: customization
@@ -35,3 +39,4 @@
     - role: backup
       tags:
         - maintenance
+
