@@ -20,6 +20,7 @@ In the event you'd like to host something on squire (please, please keep it infr
 0. Add your application config to `apps` role:
 ```
 mkdir roles/apps/templates/[your_app_name]
+cd $_
 touch docker-compose.j2 # it's j2, not .yml !
 ```
 
