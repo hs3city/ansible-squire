@@ -1,4 +1,4 @@
-# Ansible-squire
+# Squire
 
 ## Prerequisites
 
