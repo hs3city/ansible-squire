@@ -3,7 +3,6 @@
   become: yes
   vars:
     apps:
-      - name: netdata
       - name: spotty-kiwi
       - name: at
         git_url: https://github.com/hs3city/at.git
@@ -11,19 +10,18 @@
         git_url: https://github.com/hs3city/whois.git
   roles:
     - role: laptop_server
+    - role: ssh_setup
+
     - role: geerlingguy.docker
       docker_users:
         - hsop
         - allgreed # TODO: Dehardcode it
       docker_package_state: latest
-
     - role: allgreed.nomad
-
-    - role: ssh_setup
 
     - role: apps
   tasks:
-    - name: install some tools that simplify administration
+    - name: install administration tools
       package: name={{ item }} state=latest
       with_items:
         - vim
