@@ -33,6 +33,6 @@
       line: "ChallengeResponseAuthentication no"
     - regexp: "^GSSAPIAuthentication"
       line: "GSSAPIAuthentication no"
-  notify: restart sshd
+  notify: reload sshd
   become: yes
 

@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-NOMAD_ADDR := 10.14.10.4 # TODO: dehardcode it
+NOMAD_ADDR := 10.14.10.4#TODO: dehardcode it
 NOMAD_URL := http://$(NOMAD_ADDR):4646
 JOBS := $(shell find jobs -type f -name '*.nomad')
 
@@ -12,7 +12,7 @@ init: bootstrap all
 
 .PHONY: bootstrap provision jobs
 bootstrap: ## run initial configuration (once per new machine)
-	ansible-playbook --inventory=inventory --ask-pass bootstrap.yml --user=hsop # TODO: dehardcode it
+	ansible-playbook --inventory=inventory --ask-pass bootstrap.yml --user=root
 provision: galaxy_roles ## apply latest machine configuration
 	ansible-playbook --inventory=inventory --ask-become-pass playbook.yml
 

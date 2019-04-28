@@ -2,20 +2,19 @@
 - name: create application data directory
   file:
     state: directory
-    path: /etc/eph/
+    path: /var/eph/
   become: yes
 
-- name: create application data directory
+- name: create application config directory
   file:
     state: directory
-    path: /etc/eph/{{ item.app }}
-    owner: {{ item.user }}
-    loop:
-      - app: whois
-        user: nobody
+    path: /etc/svc/
   become: yes
 
-  #- name: create application config directory
+  #- name: copy application configs
   #  file:
   #    state: directory
-  #    path: /etc/svc/
+  #    path: /var/eph/{{ item.app }}
+  #    owner: "{{ item.user }}"
+  #  loop: []
+  #  become: yes

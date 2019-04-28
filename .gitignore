@@ -1,4 +1,7 @@
 testbook.yml
 
+# Ansible packages
+galaxy_roles
+
 # Ansible retry files
 *.retry

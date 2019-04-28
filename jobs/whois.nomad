@@ -12,7 +12,7 @@ job "whois" {
       }
 
       config {
-        image = "hs3city/whois:latest"
+        image = "hs3city/whois:1.2.4"
         port_map = {
             http = 8000
         }
@@ -27,7 +27,7 @@ job "whois" {
         memory = 100
         network {
             port "http" {
-                static = "6000"
+                static = "80"
             }
         }
       }
