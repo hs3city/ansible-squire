@@ -27,7 +27,7 @@ job "whois" {
         memory = 100
         network {
             port "http" {
-                static = "80"
+                static = "8000"
             }
         }
       }

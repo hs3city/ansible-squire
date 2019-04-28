@@ -11,10 +11,10 @@
     path: /etc/svc/
   become: yes
 
-  #- name: copy application configs
-  #  file:
-  #    state: directory
-  #    path: /var/eph/{{ item.app }}
-  #    owner: "{{ item.user }}"
-  #  loop: []
-  #  become: yes
+- name: copy application configs
+  copy:
+    src: "{{ item }}"
+    dest: /etc/svc/
+  loop:
+    - nginx
+  become: yes
