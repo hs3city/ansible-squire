@@ -1,54 +1,21 @@
 ---
-- name: install git
-  package: name=git state=latest
-  become: yes
-
-- name: create required directories
-  file: path={{ item }} state=directory
-  with_items:
-    - "{{ apps_compose_path }}"
-    - "{{ apps_src_path }}"
-  become: yes
-
-- name: create required volume directories
-  file: 
-    path: "{{ apps_volumes_path }}" 
-    state: directory
-    recurse: yes
-    owner: nobody
-    mode: 0755
-  become: yes
-
-- name: copy aplication sources for local build
-  git:
-    repo: "{{ item.git_url }}"
-    dest: "{{ apps_src_path }}{{ item.name }}"
-    version: master
-    force: yes
-  when: "{{ item.git_url | default('') != '' }}"
-  with_items: "{{ apps }}"
-  become: yes
-
-# this needs to be done in seperate step, because of how template works
-- name: create application config directories
+- name: create application data directory
   file:
     state: directory
-    path: "{{ apps_compose_path }}{{ item.name }}"
-  with_items: "{{ apps }}"
+    path: /etc/eph/
   become: yes
 
-- name: copy application compose files
-  template:
-    dest: "{{ apps_compose_path }}{{ item.name }}/docker-compose.yml"
-    src: "{{ item.name }}/docker-compose.j2"
-    validate: docker-compose -f %s config
-  with_items: "{{ apps }}"
+- name: create application data directory
+  file:
+    state: directory
+    path: /etc/eph/{{ item.app }}
+    owner: {{ item.user }}
+    loop:
+      - app: whois
+        user: nobody
   become: yes
 
-- name: run applications
-  docker_service:
-    project_src: "{{ apps_compose_path }}{{ item.name }}"
-    pull: true
-    build: true
-  with_items: "{{ apps }}"
-
+  #- name: create application config directory
+  #  file:
+  #    state: directory
+  #    path: /etc/svc/
