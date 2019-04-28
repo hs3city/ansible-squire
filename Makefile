@@ -5,7 +5,7 @@ NOMAD_URL := http://$(NOMAD_ADDR):4646
 JOBS := $(shell find jobs -type f -name '*.nomad')
 
 .PHONY: all init
-all: provision workload ## apply latest configuration (machine + jobs)
+all: provision clean workload ## apply latest configuration (machine + jobs)
 	
 init: bootstrap all
 	
