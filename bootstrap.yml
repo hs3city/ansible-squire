@@ -1,0 +1,34 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: install Python 2
+      raw: test -e /usr/bin/python || (apt-get update && apt-get install -y python)
+      register: py2installation
+      changed_when: py2installation.stdout != ""
+
+    - include_vars:
+        file: users.yml
+        name: users
+
+    # TODO: There has to be initial password, but have no idea what should it be - maybe use ansible Vault? + change manually? / generate randomly and output to stdout ???
+    - name: add users
+      user:
+        user: "{{ item }}"
+        shell: /bin/bash
+        update_password: on_create
+        append: yes
+        groups: sudo
+      loop: "{{ users | dict2items | map(attribute='key') | list }}"
+
+    - name: insert ssh keys
+      authorized_key:
+        user: "{{ item.key }}"
+        exclusive: no
+        key: "{{ lookup('file', item.value.ssh_public_key_location) }}"
+      loop: "{{ users | dict2items }}"
+
+    - name: lock root account
+      user:
+        user: root
+        password_lock: yes

@@ -1,8 +1,0 @@
----
-- name: Ensure local backups job
-  cron:
-    name: "local backups of docker volumes"
-    minute: "0"
-    hour: "5"
-    weekday: "1"
-    job: "tar -zcvf /backup/volumes_$(date +\\%Y\\%m\\%d_\\%H\\%M\\%S).tar.gz /var/opt/volumes"

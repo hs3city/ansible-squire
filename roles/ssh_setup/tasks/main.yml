@@ -1,0 +1,38 @@
+---
+# generate banners via `toilet "squire " -F border -f smbraille`
+# the add domain name add domain name to penultimate line
+# in the future (when we get more machines) banner generation should be automated
+- name: populate banner contents
+  copy:
+    dest: /etc/sshd-banner
+    src: banner
+  become: yes
+
+- name: set saner SSH configuration security defaults
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  loop:
+    - line: "Banner /etc/sshd-banner"
+      regexp: '(#\s*)?Banner.*'
+    - regexp: "^PasswordAuthentication"
+      line: "PasswordAuthentication no"
+    - regexp: "^PermitRootLogin"
+      line: "PermitRootLogin no"
+    - regexp: "^PermitEmptyPasswords"
+      line: "PermitEmptyPasswords no"
+    - regexp: "^X11Forwarding"
+      line: "X11Forwarding no"
+    #- regexp: "^Port"
+    #  line: "Port {{ security_ssh_port }}"
+    - regexp: "^UseDNS"
+      line: "UseDNS no"
+    - regexp: "^ChallengeResponseAuthentication"
+      line: "ChallengeResponseAuthentication no"
+    - regexp: "^GSSAPIAuthentication"
+      line: "GSSAPIAuthentication no"
+  notify: restart sshd
+  become: yes
+

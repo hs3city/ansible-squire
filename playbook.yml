@@ -11,25 +11,30 @@
         git_url: https://github.com/hs3city/whois.git
   roles:
     - role: laptop_server
-      tags:
-        - landscape
     - role: geerlingguy.docker
       docker_users:
         - hsop
+        - allgreed # TODO: Dehardcode it
       docker_package_state: latest
-      tags:
-        - landscape
 
-    - role: admin_utilities
-      tags: customization
-        - landscape
-    - role: sshd_banner
-      tags: customization
+    - role: allgreed.nomad
+
+    - role: ssh_setup
 
     - role: apps
-      tags:
-        - apps
+  tasks:
+    - name: install some tools that simplify administration
+      package: name={{ item }} state=latest
+      with_items:
+        - vim
+        - htop
+        - tmux
+      become: yes
 
-    - role: backup
-      tags:
-        - maintenance
+    - name: Ensure local backups job
+      cron:
+        name: "local backups of docker volumes"
+        minute: "0"
+        hour: "5"
+        weekday: "1"
+        job: "tar -zcvf /backup/volumes_$(date +\\%Y\\%m\\%d_\\%H\\%M\\%S).tar.gz /var/opt/volumes"

@@ -1,7 +1,0 @@
-- name: install some tools that simplify administration
-  package: name={{ item }} state=latest
-  with_items:
-    - vim
-    - htop
-    - tmux
-  become: yes
