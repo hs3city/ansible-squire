@@ -17,4 +17,5 @@
     dest: /etc/svc/
   loop:
     - nginx
+    - prometheus
   become: yes

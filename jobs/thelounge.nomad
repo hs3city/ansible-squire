@@ -13,7 +13,7 @@ job "bouncer" {
             http = 9000
         }
         volumes = [
-            "var/eph/lounge:/var/opt/thelounge",
+            "/var/eph/lounge:/var/opt/thelounge",
         ]
       }
 
