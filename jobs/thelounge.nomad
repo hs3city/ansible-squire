@@ -1,20 +1,19 @@
-job "the_longue" {
+job "bouncer" {
   datacenters = ["dc1"]
 
-  group "the_lounge" {
+  group "lounge" {
     count = 1
 
-    task "main" {
+    task "lounge" {
       driver = "docker"
 
       config {
-        # TODO: How to manage versions - can I get this from consul maybe and rerun the job on changes :D ???
         image = "thelounge/thelounge:3.0.1"
         port_map = {
             http = 9000
         }
         volumes = [
-            "/home/allgreed/.thelounge:/var/opt/thelounge",
+            "var/eph/lounge:/var/opt/thelounge",
         ]
       }
 
