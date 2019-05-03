@@ -23,7 +23,7 @@ $(JOBS):
 	nomad job run -address=$(NOMAD_URL) $@
 
 galaxy_roles: requirements.yml
-	ansible-galaxy install -r requirements.yml --roles-path galaxy_roles
+	ansible-galaxy install --force -r requirements.yml --roles-path galaxy_roles
 
 .PHONY: clean
 clean:
