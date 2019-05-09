@@ -1,0 +1,17 @@
+devices:
+  - name: hs
+    address: 10.14.10.1
+    user: prometheus
+    password: ghJcdWs5eTxecRgJZpMfV7LJwn7E
+  #- name: codeme
+  #  address: 213.192.75.116
+  #  user: prometheus-covdeme
+  #  password: a4a9@pIWxesAz3Tu3J^ifGVMv
+
+features:
+  bgp: no
+  dhcp: yes
+  dhcpv6: no
+  routes: no
+  pools: no
+  optics: no

@@ -19,4 +19,5 @@
     - nginx
     - prometheus
     - grafana
+    - mikrotik_exporter
   become: yes

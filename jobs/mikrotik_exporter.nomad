@@ -9,14 +9,16 @@ job "mikrotik_exporter" {
 
       config {
         image = "allgreed/mikrotik-prometheus-exporter:preview0"
+
         args = [
-            "-address", "10.14.10.1",
-            "-device", "my_router",
-            "-user", "prometheus",
-            "-password", "ghJcdWs5eTxecRgJZpMfV7LJwn7E",
-            "-with-dhcp",
+            "--config-file", "/etc/config.yml",
         ]
         command = "mikrotik-exporter_linux_amd64"
+
+        volumes = [
+            "/etc/svc/mikrotik_exporter/config.yml:/etc/config.yml",
+        ]
+
         port_map = {
             http = 9436
         }
