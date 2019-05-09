@@ -1,6 +1,0 @@
-# make sure they end in /
-apps_compose_path: /etc/apps/
-apps_src_path: /opt/apps/
-apps_volumes_path: /var/opt/volumes/
-
-apps_names: "{{ apps | map(attribute='name') | list }}"
