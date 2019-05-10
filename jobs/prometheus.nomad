@@ -15,6 +15,7 @@ job "prometheus" {
         }
         volumes = [
             "/etc/svc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml",
+            "/var/eph/prometheus/:/prometheus",
         ]
       }
 
