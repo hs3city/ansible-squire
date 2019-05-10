@@ -3,7 +3,7 @@ devices:
     address: 10.14.10.1
     user: prometheus
     password: ghJcdWs5eTxecRgJZpMfV7LJwn7E
-  #- name: codeme
+  #- name: cme
   #  address: 213.192.75.116
   #  user: prometheus-covdeme
   #  password: a4a9@pIWxesAz3Tu3J^ifGVMv
