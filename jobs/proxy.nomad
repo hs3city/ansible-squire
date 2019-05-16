@@ -15,7 +15,7 @@ job "reverse_proxy" {
         volumes = [
             "/srv:/usr/share/nginx/html/",
             "/etc/svc/nginx/:/etc/nginx/conf.d/",
-            #"/etc/letsencrypt:/etc/letsencrypt",
+            "/var/eph/letsencrypt:/etc/letsencrypt",
         ]
       }
 
