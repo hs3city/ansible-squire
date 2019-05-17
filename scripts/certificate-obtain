@@ -1,0 +1,2 @@
+# $1 - domain
+docker run --rm -it -v /var/eph/letsencrypt/:/etc/letsencrypt/ -v /srv:/srv certbot/certbot certonly --webroot --webroot-path /srv --agree-tos -d $1
