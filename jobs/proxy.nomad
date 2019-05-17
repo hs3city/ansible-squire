@@ -16,6 +16,7 @@ job "reverse_proxy" {
             "/srv:/usr/share/nginx/html/",
             "/etc/svc/nginx/:/etc/nginx/conf.d/",
             "/var/eph/letsencrypt:/etc/letsencrypt",
+            "/var/eph/nginx/htpasswd:/etc/nginx/htpasswd",
         ]
       }
 
