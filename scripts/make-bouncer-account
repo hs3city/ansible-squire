@@ -1,0 +1,8 @@
+CONTAINER=$(docker ps | grep lounge | awk '{ print $NF }')
+
+echo "user: $1"
+printf "pass: "
+head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32
+printf "\n"
+
+docker exec --user node -it $CONTAINER thelounge add $1

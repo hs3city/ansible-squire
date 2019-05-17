@@ -28,6 +28,13 @@
         - tmux
       become: yes
 
+    - name: copy scripts
+      copy:
+        src: scripts/
+        dest: /usr/local/bin
+        mode: o+x
+      become: yes
+
       #    - name: Ensure local backups job
       #      cron:
       #        name: "local backups of docker volumes"
