@@ -15,6 +15,7 @@
     - role: geerlingguy.docker
       docker_users:
         - allgreed # TODO: Dehardcode it
+        - yasiu
       docker_package_state: latest
     
     - role: allgreed.nomad
