@@ -21,7 +21,7 @@ job "prometheus" {
 
       resources {
         cpu    = 200
-        memory = 100
+        memory = 300
 
         network {
             port "http" {
