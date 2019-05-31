@@ -1,6 +1,5 @@
 job "prometheus" {
   datacenters = ["dc1"]
-  type = "system"
 
   group "prometheus" {
     count = 1

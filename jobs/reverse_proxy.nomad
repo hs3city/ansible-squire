@@ -1,8 +1,6 @@
 job "reverse_proxy" {
   datacenters = ["dc1"]
 
-  type = "system"
-
   group "nginx" {
     count = 1
 
