@@ -19,7 +19,7 @@ job "bouncer" {
 
       resources {
         cpu    = 1000
-        memory = 500
+        memory = 700
 
         network {
             port "http" {
