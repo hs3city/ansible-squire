@@ -14,6 +14,10 @@ scrape_configs:
     static_configs:
       - targets: ["10.14.10.4:9200"]
 
+  - job_name: "mateometer"
+    static_configs:
+      - targets: ["mate.at.hs3.pl"]
+
   - job_name: "mikrotik-tmp"
     static_configs:
       - targets: ["10.14.10.48:9436"]
