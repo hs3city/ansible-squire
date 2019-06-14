@@ -8,7 +8,7 @@ job "mateometer" {
       driver = "docker"
 
       config {
-        image = "allgreed/mateometer:preview2"
+        image = "allgreed/mateometer:preview3"
 
         port_map = {
             http = 8000
