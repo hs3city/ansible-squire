@@ -1,5 +1,5 @@
 ---
 allgreed:
-    ssh_public_key_location: "~/ThirdPartyKeys/allgreed.pub"
+    ssh_public_key_location: "~/Keys/id_rsa_4096.pub"
 yasiu:
-    ssh_public_key_location: "~/ThirdPartyKeys/yasiu.pub"
+    ssh_public_key_location: "~/IdentitiesKnown/yasiu.pub"
