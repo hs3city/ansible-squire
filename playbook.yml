@@ -27,6 +27,7 @@
         - vim
         - htop
         - tmux
+        - rfkill
       become: yes
 
     - name: copy scripts
