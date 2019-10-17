@@ -16,7 +16,7 @@ job "grafana" {
         volumes = [
           "/etc/svc/grafana/grafana.ini:/etc/grafana/grafana.ini",
           "/etc/svc/grafana/datasource.yml:/etc/grafana/provisioning/datasources/default.yaml",
-          "/var/eph/grafana/:/var/lib/grafana/dashboards/",
+          "/var/eph/grafana/:/var/lib/grafana",
         ]
       }
 
