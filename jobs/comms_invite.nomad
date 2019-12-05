@@ -8,7 +8,7 @@ job "comms-invite" {
       driver = "docker"
 
       config {
-        image = "hs3city/comms-invite:latest"
+        image = "hs3city/comms-invite:0.0.0"
         port_map = {
             http = 8000
         }
