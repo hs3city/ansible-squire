@@ -25,7 +25,7 @@ job "huginn" {
         memory = 2000
         network {
             port "http" {
-                static = "9300"
+                static = "9200"
             }
         }
       }
