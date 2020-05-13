@@ -85,3 +85,24 @@ services:
       - "traefik.http.routers.lounge.tls=true"
       - "traefik.http.routers.lounge.tls.certresolver=le"
 
+  exoframe-server:
+    image: exoframe/server
+    restart: always
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/path/to/exoframe-folder:/root/.exoframe"
+      - "/home/not7cd/.ssh/authorized_keys:/root/.ssh/authorized_keys:ro"
+    environment:
+      EXO_PRIVATE_KEY: ${EXO_PRIVATE_KEY}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.exoframe-server.rule=Host(`exoframe.hs3.pl`)"
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - /var/eph/postgres:/var/lib/postgresql/data
