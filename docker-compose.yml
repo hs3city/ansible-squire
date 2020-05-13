@@ -2,9 +2,7 @@ version: '3'
 
 services:
   reverse-proxy:
-    # The official v2 Traefik docker 
     image: traefik:v2.2
-    # Enables the web UI and tells Traefik to listen to docker
     command:
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
@@ -24,7 +22,6 @@ services:
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     volumes:
-      # So that Traefik can listen to the Docker events
       - "/var/eph/letsencrypt:/letsencrypt"
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
@@ -54,6 +51,7 @@ services:
 
   etherpad:
     image: "fuerst/etherpad-docker:latest"
+    restart: always
     volumes:
       - "/var/eph/etherpad-lite:/opt/etherpad-lite/var"
     labels:
@@ -65,6 +63,7 @@ services:
 
   spotty-kiwi:
     image: "hs3city/spotty-kiwi:0.1.0"
+    restart: always
     volumes:
       - "/var/eph/spotty-kiwi/.env:/app/.env"
     labels:
