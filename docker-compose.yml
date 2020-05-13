@@ -52,4 +52,15 @@ services:
       - "traefik.http.routers.whohacks.tls=true"
       - "traefik.http.routers.whohacks.tls.certresolver=le"
 
+  etherpad:
+    image: "fuerst/etherpad-docker:latest"
+    volumes:
+      - "/var/eph/etherpad-lite:/opt/etherpad-lite/var"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.etherpad.rule=Host(`pad.at.hs3.pl`)"
+      - "traefik.http.routers.etherpad.entrypoints=websecure"
+      - "traefik.http.routers.etherpad.tls=true"
+      - "traefik.http.routers.etherpad.tls.certresolver=le"
+
 
