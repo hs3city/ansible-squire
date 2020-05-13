@@ -5,29 +5,51 @@ services:
     # The official v2 Traefik docker 
     image: traefik:v2.2
     # Enables the web UI and tells Traefik to listen to docker
-    command: --api.insecure=true --providers.docker
+    command:
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+
+      - "--certificatesresolvers.le.acme.tlschallenge=true" # le – lets encrypt
+      - "--certificatesresolvers.le.acme.email=kontakt@hs3.pl"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      #- "--certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
     ports:
-      # The HTTP port
       - "80:80"
+      - "443:443"
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     volumes:
       # So that Traefik can listen to the Docker events
+      - "/var/eph/letsencrypt:/letsencrypt"
       - /var/run/docker.sock:/var/run/docker.sock
-  whoami:
-    image: containous/whoami
     labels:
-      - "traefik.http.routers.whoami.rule=Host(`whoami.at.hs3.pl`)"
-  
+      # global redirect to https
+      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=web"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+
+      # middleware redirect
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+
   whohacks:
     image: hs3city/whois:1.2.4
     restart: always
     environment:
-      SECRET_KEY: "fq6RlW1wZ71wl2rlHnrphvGe8uOoB7ioHKWm0fBAnmlyHxRFtWWgawrsGsIw3MBI" # TODO
+      SECRET_KEY: ${WHOHACKS_SECRET}
       DB_PATH: /data/whoisdevices.db
     volumes:
       - "/var/eph/whohacks:/data"
       - "/etc/localtime:/etc/localtime:ro"
     labels:
+      - "traefik.enable=true"
       - "traefik.http.routers.whohacks.rule=Host(`whois.at.hs3.pl`)"
+      - "traefik.http.routers.whohacks.entrypoints=websecure"
+      - "traefik.http.routers.whohacks.tls=true"
+      - "traefik.http.routers.whohacks.tls.certresolver=le"
+
 
