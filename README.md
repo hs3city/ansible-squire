@@ -12,7 +12,9 @@
 ### Basics
 
 ```
-make help
+# fresh install
+ansible-playbook --inventory=inventory --ask-pass bootstrap.yml --user=root
+ansible-playbook --inventory=inventory --ask-become-pass playbook.yml
 ```
 
 ### Testing
