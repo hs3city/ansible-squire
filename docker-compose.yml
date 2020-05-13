@@ -63,4 +63,15 @@ services:
       - "traefik.http.routers.etherpad.tls=true"
       - "traefik.http.routers.etherpad.tls.certresolver=le"
 
+  spotty-kiwi:
+    image: "hs3city/spotty-kiwi:0.1.0"
+    volumes:
+      - "/var/eph/spotty-kiwi/.env:/app/.env"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.spotty-kiwi.rule=Host(`spotty-kiwi.at.hs3.pl`)"
+      - "traefik.http.routers.spotty-kiwi.entrypoints=websecure"
+      - "traefik.http.routers.spotty-kiwi.tls=true"
+      - "traefik.http.routers.spotty-kiwi.tls.certresolver=le"
+
 
